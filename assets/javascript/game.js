@@ -15,7 +15,7 @@ var game = {
 		this.inProgress = true;
 	},
 
-	// Picks a new word and initializes other game variables
+	// Pick a new word and initialize other game variables
 	reset() {
 		console.log("NEW GAME");
 
@@ -74,6 +74,8 @@ var game = {
 					this.win();					
 					return;
 				}
+				// Perform punch animation
+				this.punch();
 			}
 		}
 
@@ -84,10 +86,12 @@ var game = {
 			if (this.guessesRemaining===0){
 				this.lose();
 			}
+			// Perform miss animation
+			this.miss();
 		}
 	},
 
-	// Updates screen elements
+	// Update onscreen blanks and incorrect guesses
 	update(){
 		document.getElementById('wordState').innerHTML = this.wordState.join("");
 		document.getElementById('incorrectLetters').innerHTML = this.incorrectLetters.join(" ");
@@ -95,6 +99,48 @@ var game = {
 		console.log("State: "+this.wordState.join(" "));
 		console.log("Letters left: "+this.lettersRemaining);
 		console.log("Guesses left: "+this.guessesRemaining);
+	},
+
+	// Draws Little Mac punching Mike
+	punch(){
+		// Hide default Little Mac and Mike animations
+		document.getElementById('player').style.display = 'none';
+		document.getElementById('PC').style.display = 'none';
+
+		// Display "punched" frames
+		document.getElementById('player-punched').style.backgroundImage = "url('assets/images/mac-punch.png')";
+		document.getElementById('PC-punched').style.backgroundImage = "url('assets/images/mike-hit.png')";
+		document.getElementById('player-punched').style.display = 'block';
+		document.getElementById('PC-punched').style.display = 'block';
+
+		// Delay before resuming animation
+		setTimeout(function(){
+			document.getElementById('player-punched').style.display = 'none';
+			document.getElementById('PC-punched').style.display = 'none';
+			document.getElementById('player').style.display = 'block';
+			document.getElementById('PC').style.display = 'block';
+		}, 750);
+	},
+
+	// Draws Mike punching Little Mac
+	miss(){
+		// Hide default Little Mac and Mike animations
+		document.getElementById('player').style.display = 'none';
+		document.getElementById('PC').style.display = 'none';
+
+		// Display "punched" frames
+		document.getElementById('player-punched').style.backgroundImage = "url('assets/images/mac-hit.png')";
+		document.getElementById('PC-punched').style.backgroundImage = "url('assets/images/mike-punch.png')";
+		document.getElementById('player-punched').style.display = 'block';
+		document.getElementById('PC-punched').style.display = 'block';
+
+		// Delay before resuming animation
+		setTimeout(function(){
+			document.getElementById('player-punched').style.display = 'none';
+			document.getElementById('PC-punched').style.display = 'none';
+			document.getElementById('player').style.display = 'block';
+			document.getElementById('PC').style.display = 'block';
+		}, 750);
 	}
 };
 

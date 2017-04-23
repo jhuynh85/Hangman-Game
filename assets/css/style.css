@@ -103,3 +103,24 @@ section {
 		background-position: -555px 0;
 	}
 }
+
+#player-punched {
+	position: absolute;
+	z-index: 9999;
+	bottom: 30%;
+	left: 45%;
+	width: 40px;
+	height: 73px;
+	background-image: url('../images/mac-punch.png');
+	display: none;
+}
+
+#PC-punched {
+	position: absolute;
+	bottom: 40%;
+	left: 45%;
+	width: 80px;
+	height: 118px;
+	background-image: url('../images/mike-hit.png');
+	display: none;
+}
