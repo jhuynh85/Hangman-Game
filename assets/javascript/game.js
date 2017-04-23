@@ -5,7 +5,7 @@ var game = {
 	guessesRemaining: 6,
 	wins: 0,
 	inProgress: false,
-	wordList: ["object", "array", "variable", "loop", "container", "grid", "javascript", "column", "string"],
+	wordList: ["object", "array", "variable", "loop", "container", "grid", "javascript", "column", "string", "bootstrap", ],
 	currentWord: "",
 	wordState: [],
 	lettersRemaining: 0,
@@ -97,14 +97,15 @@ var game = {
 	update(){
 		// Update blanks
 		document.getElementById('wordState').innerHTML = this.wordState.join("");
+
 		// Update incorrect letters
 		document.getElementById('incorrectLetters').innerHTML = this.incorrectLetters.join(" ");
+
 		// Update health bars
 		var percentage = this.guessesRemaining/6;
 		document.getElementById('playerHP').style.width = Math.floor(percentage*215)+'px';
 		percentage = this.lettersRemaining/this.currentWord.length;
 		document.getElementById('CPUHP').style.width = Math.floor(percentage*215)+'px';
-
 
 		console.log("Word: "+this.currentWord);
 		console.log("State: "+this.wordState.join(" "));
@@ -112,7 +113,7 @@ var game = {
 		console.log("Guesses left: "+this.guessesRemaining);
 	},
 
-	// Draws Little Mac punching Mike
+	// Draw Little Mac punching Mike
 	punch(){
 		this.punchSound.play();
 		
@@ -136,7 +137,7 @@ var game = {
 		}, 750);
 	},
 
-	// Draws Mike punching Little Mac
+	// Draw Mike punching Little Mac
 	miss(){
 		this.hitSound.play();
 
@@ -170,7 +171,7 @@ game.update();
 document.onkeyup = function(event){
 	event = event || window.event;
 
- 	var key = event.keyCode;
+	var key = event.keyCode;
 
  	// Check if letter key
  	if (key > 64 && key <91){
