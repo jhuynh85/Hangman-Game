@@ -8,7 +8,33 @@
 		<title>Hangman Game</title>
 	</head>
 	<body>
-		<div id="wordState"></div>
+		<audio autoplay loop>
+			<source src="assets/audio/fight.mp3" type="audio/mp3">
+			<p>If you are reading this, it is because your browser does not support the audio element.</p>
+		</audio>
+		<header>
+			<h1>MIKE TYSON'S SUPER HANGMAN PUNCH-OUT!</h1>
+		</header>
+		
+		<div id="ring">
+			<img id="ring-img" src="assets/images/ring.jpg">
+			<div id="player"></div>
+			<div id="player-punched"></div>
+			<div id="PC"></div>
+			<div id="PC-punched"></div>
+
+			<div class="healthBar" id="playerHP"></div>
+			<div class="healthBar" id="CPUHP"></div>
+		</div>
+
+		<aside>
+		<section>Current Word<br>
+			<div id="wordState"></div>
+		</section>
+		<section>Letters Already Guessed<br>
+			<div id="incorrectLetters"></div>
+			</section>
+		</aside>
 
 		<script type="text/javascript" src="assets/javascript/game.js"></script>
 	</body>

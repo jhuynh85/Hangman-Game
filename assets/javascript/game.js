@@ -1,6 +1,7 @@
 // Game object
 var game = {
 	lettersGuessed: [],
+	incorrectLetters: [],
 	guessesRemaining: 6,
 	wins: 0,
 	inProgress: false,
@@ -29,6 +30,7 @@ var game = {
 
 		this.lettersRemaining = this.currentWord.length;
 		this.lettersGuessed = [];
+		this.incorrectLetters = [];
 		this.guessesRemaining = 6;
 	},
 
@@ -41,7 +43,10 @@ var game = {
 	},
 
 	lose() {
-
+		console.log("YOU LOSE!");
+		console.log("-------------------------");
+		this.reset();
+		this.update();
 	},
 
 	checkLetter(c) {
@@ -52,12 +57,17 @@ var game = {
 				return;
 			}
 		}
+		// Add letter to list of guessed letters
+		this.lettersGuessed.push(c);
+
+		var found = false; // Flags whether a letter was found
 
 		// Check if currentWord contains the given letter and reveal them in wordState
-		for (var i=0; i<this.currentWord.length; i++){
+		for (var i=0; i<this.currentWord.length; i++){		
 			if (c===this.currentWord.charAt(i)){
 				this.wordState[i] = c;
 				this.lettersRemaining--;
+				found = true;
 
 				// Check if any letters left
 				if (this.lettersRemaining === 0){
@@ -67,16 +77,24 @@ var game = {
 			}
 		}
 
-		// Add letter to list of guessed letters
-		this.lettersGuessed.push(c);		
+		// Letter not found
+		if (!found){
+			this.incorrectLetters.push(c);
+			this.guessesRemaining--;
+			if (this.guessesRemaining===0){
+				this.lose();
+			}
+		}
 	},
 
 	// Updates screen elements
 	update(){
-		document.getElementById('wordState').innerHTML = this.wordState.join(" ");
+		document.getElementById('wordState').innerHTML = this.wordState.join("");
+		document.getElementById('incorrectLetters').innerHTML = this.incorrectLetters.join(" ");
 		console.log("Word: "+this.currentWord);
 		console.log("State: "+this.wordState.join(" "));
 		console.log("Letters left: "+this.lettersRemaining);
+		console.log("Guesses left: "+this.guessesRemaining);
 	}
 };
 
