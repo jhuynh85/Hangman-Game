@@ -5,11 +5,12 @@ var game = {
 	guessesRemaining: 6,
 	wins: 0,
 	inProgress: false,
-	wordList: ["object", "array", "variable", "loop", "container", "grid", "javascript"],
+	wordList: ["object", "array", "variable", "loop", "container", "grid", "javascript", "column", "string"],
 	currentWord: "",
 	wordState: [],
 	lettersRemaining: 0,
-
+	punchSound: null,
+	hitSound: null,
 
 	startGame() {
 		this.inProgress = true;
@@ -72,7 +73,6 @@ var game = {
 				// Check if any letters left
 				if (this.lettersRemaining === 0){
 					this.win();					
-					return;
 				}
 				// Perform punch animation
 				this.punch();
@@ -91,10 +91,19 @@ var game = {
 		}
 	},
 
-	// Update onscreen blanks and incorrect guesses
+	// Update screen elements
 	update(){
+		// Update blanks
 		document.getElementById('wordState').innerHTML = this.wordState.join("");
+		// Update incorrect letters
 		document.getElementById('incorrectLetters').innerHTML = this.incorrectLetters.join(" ");
+		// Update health bars
+		var percentage = this.guessesRemaining/6;
+		document.getElementById('playerHP').style.width = Math.floor(percentage*215)+'px';
+		percentage = this.lettersRemaining/this.currentWord.length;
+		document.getElementById('CPUHP').style.width = Math.floor(percentage*215)+'px';
+
+
 		console.log("Word: "+this.currentWord);
 		console.log("State: "+this.wordState.join(" "));
 		console.log("Letters left: "+this.lettersRemaining);
@@ -112,6 +121,7 @@ var game = {
 		document.getElementById('PC-punched').style.backgroundImage = "url('assets/images/mike-hit.png')";
 		document.getElementById('player-punched').style.display = 'block';
 		document.getElementById('PC-punched').style.display = 'block';
+		this.punchSound.play();
 
 		// Delay before resuming animation
 		setTimeout(function(){
@@ -133,6 +143,7 @@ var game = {
 		document.getElementById('PC-punched').style.backgroundImage = "url('assets/images/mike-punch.png')";
 		document.getElementById('player-punched').style.display = 'block';
 		document.getElementById('PC-punched').style.display = 'block';
+		this.hitSound.play();
 
 		// Delay before resuming animation
 		setTimeout(function(){
@@ -145,6 +156,8 @@ var game = {
 };
 
 // Initialize the game
+game.punchSound = new Audio('assets/audio/punch.mp3');
+game.hitSound = new Audio('assets/audio/hit.mp3');
 game.reset();
 game.update();
 

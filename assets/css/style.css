@@ -30,7 +30,7 @@ header {
 
 aside {
 	position: relative;
-	color: #ffffff;
+	color: #b69dff;
 }
 
 #ring-img {
@@ -44,7 +44,7 @@ section {
 
 #wordState {
 	letter-spacing: 10px;
-	/*color: #ffffff;*/
+	color: #ffffff;
 }
 
 #incorrectLetters {
@@ -54,7 +54,7 @@ section {
 .healthBar {
 	position: absolute;
 	bottom: 15px;
-	width: 200px;
+	width: 215px;
 	height: 25px;
 	z-index: 9998;
 }
