@@ -72,7 +72,8 @@ var game = {
 
 				// Check if any letters left
 				if (this.lettersRemaining === 0){
-					this.win();					
+					this.win();
+					return;					
 				}
 				// Perform punch animation
 				this.punch();
@@ -85,6 +86,7 @@ var game = {
 			this.guessesRemaining--;
 			if (this.guessesRemaining===0){
 				this.lose();
+				return;
 			}
 			// Perform miss animation
 			this.miss();
@@ -112,6 +114,8 @@ var game = {
 
 	// Draws Little Mac punching Mike
 	punch(){
+		this.punchSound.play();
+		
 		// Hide default Little Mac and Mike animations
 		document.getElementById('player').style.display = 'none';
 		document.getElementById('PC').style.display = 'none';
@@ -121,7 +125,7 @@ var game = {
 		document.getElementById('PC-punched').style.backgroundImage = "url('assets/images/mike-hit.png')";
 		document.getElementById('player-punched').style.display = 'block';
 		document.getElementById('PC-punched').style.display = 'block';
-		this.punchSound.play();
+		
 
 		// Delay before resuming animation
 		setTimeout(function(){
@@ -134,6 +138,8 @@ var game = {
 
 	// Draws Mike punching Little Mac
 	miss(){
+		this.hitSound.play();
+
 		// Hide default Little Mac and Mike animations
 		document.getElementById('player').style.display = 'none';
 		document.getElementById('PC').style.display = 'none';
@@ -142,8 +148,7 @@ var game = {
 		document.getElementById('player-punched').style.backgroundImage = "url('assets/images/mac-hit.png')";
 		document.getElementById('PC-punched').style.backgroundImage = "url('assets/images/mike-punch.png')";
 		document.getElementById('player-punched').style.display = 'block';
-		document.getElementById('PC-punched').style.display = 'block';
-		this.hitSound.play();
+		document.getElementById('PC-punched').style.display = 'block';		
 
 		// Delay before resuming animation
 		setTimeout(function(){
