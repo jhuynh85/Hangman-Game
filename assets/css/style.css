@@ -30,7 +30,7 @@ header {
 
 aside {
 	position: relative;
-	color: #b69dff;
+	color: yellow;
 }
 
 #ring-img {
@@ -59,14 +59,33 @@ section {
 	z-index: 9998;
 }
 
+.hpBackground {
+	position: absolute;
+	bottom: 15px;
+	width: 215px;
+	height: 25px;
+	z-index: 9997;
+	background-color: black;
+}
+
 #playerHP {
 	left: 5px;
 	background-color: #ffffff;
 }
 
+#hpBG1 {
+	left: 5px;
+	border: 1px solid #ffffff;
+}
+
 #CPUHP {
 	right: 5px;
 	background-color: #ec3636;
+}
+
+#hpBG2 {
+	right: 5px;
+	border: 1px solid #ec3636;
 }
 
 #player {

@@ -9,8 +9,13 @@ var game = {
 	currentWord: "",
 	wordState: [],
 	lettersRemaining: 0,
-	punchSound: null,
-	hitSound: null,
+	music: true,
+	punchFX: null,
+	hitFX: null,
+	KOWinFX: null,
+	KOLoseFX: null,
+	bellFX: null,
+	crowdFX: null,
 
 	startGame() {
 		this.inProgress = true;
@@ -33,12 +38,15 @@ var game = {
 		this.lettersGuessed = [];
 		this.incorrectLetters = [];
 		this.guessesRemaining = 6;
+
+		this.bellFX.play();
 	},
 
 	win() {
 		console.log("YOU WIN!");
 		console.log("-------------------------");
 		this.wins++;
+		this.mikeKO();
 		this.reset();
 		this.update();
 	},
@@ -46,6 +54,7 @@ var game = {
 	lose() {
 		console.log("YOU LOSE!");
 		console.log("-------------------------");
+		this.macKO();
 		this.reset();
 		this.update();
 	},
@@ -103,9 +112,9 @@ var game = {
 
 		// Update health bars
 		var percentage = this.guessesRemaining/6;
-		document.getElementById('playerHP').style.width = Math.floor(percentage*215)+'px';
+		this.hpAnimate('playerHP', Math.floor(percentage*215));
 		percentage = this.lettersRemaining/this.currentWord.length;
-		document.getElementById('CPUHP').style.width = Math.floor(percentage*215)+'px';
+		this.hpAnimate('CPUHP', Math.floor(percentage*215));
 
 		console.log("Word: "+this.currentWord);
 		console.log("State: "+this.wordState.join(" "));
@@ -115,7 +124,7 @@ var game = {
 
 	// Draw Little Mac punching Mike
 	punch(){
-		this.punchSound.play();
+		this.punchFX.play();
 		
 		// Hide default Little Mac and Mike animations
 		document.getElementById('player').style.display = 'none';
@@ -139,7 +148,7 @@ var game = {
 
 	// Draw Mike punching Little Mac
 	miss(){
-		this.hitSound.play();
+		this.hitFX.play();
 
 		// Hide default Little Mac and Mike animations
 		document.getElementById('player').style.display = 'none';
@@ -158,12 +167,103 @@ var game = {
 			document.getElementById('player').style.display = 'block';
 			document.getElementById('PC').style.display = 'block';
 		}, 750);
+	},
+
+
+	// Draw Mac getting KO'ed
+	macKO() {
+		this.KOLoseFX.play();
+		this.crowdFX.play();
+		var player = document.getElementById('player');
+		var pc = document.getElementById('PC');
+		var playerPunched = document.getElementById('player-punched');
+		var PCpunched = document.getElementById('PC-punched');
+
+		// Hide default Little Mac animation
+		player.style.display = 'none';
+		pc.style.display = 'none';
+
+		// Display KO frame
+		playerPunched.style.width = '73px';
+		playerPunched.style.height = '40px';
+		playerPunched.style.backgroundImage = "url('assets/images/mac-KO.png')";
+		PCpunched.style.backgroundImage = "url('assets/images/mike-punch-KO.png')";
+		PCpunched.style.display = 'block';		
+		playerPunched.style.display = 'block';
+
+		// Delay before resuming animation
+		setTimeout(function(){
+			playerPunched.style.display = 'none';
+			PCpunched.style.display = 'none';
+			playerPunched.style.width = '40px';
+			playerPunched.style.height = '73px';
+			player.style.display = 'block';
+			pc.style.display = 'block';
+		}, 1750);
+	},
+
+	// Draw Mike getting KO'ed
+	mikeKO() {
+		this.KOWinFX.play();
+		this.crowdFX.play();
+		var player = document.getElementById('player');
+		var pc = document.getElementById('PC');
+		var playerPunched = document.getElementById('player-punched');
+		var PCpunched = document.getElementById('PC-punched');
+
+		// Hide default Little Mac animation
+		player.style.display = 'none';
+		pc.style.display = 'none';
+
+		// Display KO frame
+		playerPunched.style.backgroundImage = "url('assets/images/mac-punch-KO.png')";
+		PCpunched.style.backgroundImage = "url('assets/images/mike-KO.png')";
+		PCpunched.style.display = 'block';		
+		playerPunched.style.display = 'block';
+
+		// Delay before resuming animation
+		setTimeout(function(){
+			playerPunched.style.display = 'none';
+			PCpunched.style.display = 'none';
+			player.style.display = 'block';
+			pc.style.display = 'block';
+		}, 1750);
+
+	},
+
+	// Animate the HP bar to the specified width
+	hpAnimate(barID, targetWidth){
+		var elem = document.getElementById(barID);
+    	var currentWidth = elem.clientWidth;
+    	var id = setInterval(frame, 5);
+    	
+    	function frame() {
+        	if (currentWidth == targetWidth) {
+            	clearInterval(id);
+        	} else if (currentWidth > targetWidth) {
+            	currentWidth--; 
+            	elem.style.width = currentWidth+'px'; 
+        	} else {
+        		currentWidth++; 
+            	elem.style.width = currentWidth+'px';
+        	}
+		}
+	},
+
+	// Toggle music on/off
+	musicToggle() {
+		document.getElementById('theme').muted = !this.music;
 	}
 };
 
 // Initialize the game
-game.punchSound = new Audio('assets/audio/punch.mp3');
-game.hitSound = new Audio('assets/audio/hit.mp3');
+game.punchFX = new Audio('assets/audio/punch.mp3');
+game.hitFX = new Audio('assets/audio/hit.mp3');
+game.KOWinFX = new Audio('assets/audio/ko-win.mp3');
+game.KOLoseFX = new Audio('assets/audio/ko-lose.mp3');
+game.bellFX = new Audio('assets/audio/bell.mp3');
+game.crowdFX = new Audio('assets/audio/crowd.mp3');
+
 game.reset();
 game.update();
 
