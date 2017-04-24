@@ -17,6 +17,7 @@ body {
 
 header {
 	margin: 20px 0;
+	font-size: 1.5em;
 }
 
 #content {
@@ -41,7 +42,7 @@ aside {
 }
 
 section {
-	margin-top: 30px;
+	margin-top: 20px;
 }
 
 #wordState {
@@ -51,6 +52,7 @@ section {
 
 #incorrectLetters {
 	color: #e64545;
+	margin-bottom: 30px;
 }
 
 .healthBar {
@@ -144,4 +146,36 @@ section {
 	height: 118px;
 	background-image: url('../images/mike-hit.png');
 	display: none;
+}
+
+#scoreboard {
+	width: 165px;
+	margin: 20px auto 0 auto;
+}
+
+#trophy-img {
+	position: relative;
+	float: left;
+}
+
+#score {
+	position: relative;
+	float: right;
+	font-size: 1.5em;
+	color: #ffffff;
+	padding-top: 25px;
+}
+
+#toggleMusic {
+	position: absolute;
+	bottom: 12%;
+	cursor: pointer;
+}
+
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
 }

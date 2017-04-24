@@ -17,7 +17,7 @@
 			<h1>MIKE TYSON'S SUPER HANGMAN PUNCH-OUT!</h1>
 		</header>
 		
-		<div id="ring">
+		<div class="clearfix" id="ring">
 			<img id="ring-img" src="assets/images/ring.jpg">
 			<div id="player"></div>
 			<div id="player-punched"></div>
@@ -28,6 +28,11 @@
 			<div class="healthBar" id="CPUHP"></div>
 			<div class="hpBackground" id="hpBG1"></div>
 			<div class="hpBackground" id="hpBG2"></div>
+			<div id="toggleMusic" onclick="game.musicToggle()"><img src="assets/images/mute.png"></div>
+		</div>
+		<div class="clearfix" id="scoreboard">
+			<img id="trophy-img" src="assets/images/trophy.png">
+			<div id="score">X 0</div>
 		</div>
 
 		<aside>

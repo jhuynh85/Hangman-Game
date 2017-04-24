@@ -9,7 +9,7 @@ var game = {
 	currentWord: "",
 	wordState: [],
 	lettersRemaining: 0,
-	music: true,
+	muted: false,
 	punchFX: null,
 	hitFX: null,
 	KOWinFX: null,
@@ -46,17 +46,22 @@ var game = {
 		console.log("YOU WIN!");
 		console.log("-------------------------");
 		this.wins++;
+		document.getElementById('score').innerHTML = 'X '+this.wins;
 		this.mikeKO();
-		this.reset();
-		this.update();
+		setTimeout(function(){
+			game.reset();
+			game.update();
+		}, 750);
 	},
 
 	lose() {
 		console.log("YOU LOSE!");
 		console.log("-------------------------");
 		this.macKO();
-		this.reset();
-		this.update();
+		setTimeout(function(){
+			game.reset();
+			game.update();
+		}, 750);
 	},
 
 	checkLetter(c) {
@@ -178,6 +183,7 @@ var game = {
 		var pc = document.getElementById('PC');
 		var playerPunched = document.getElementById('player-punched');
 		var PCpunched = document.getElementById('PC-punched');
+		var wordState = document.getElementById('wordState');
 
 		// Hide default Little Mac animation
 		player.style.display = 'none';
@@ -252,7 +258,8 @@ var game = {
 
 	// Toggle music on/off
 	musicToggle() {
-		document.getElementById('theme').muted = !this.music;
+		document.getElementById('theme').muted = !this.muted;
+		this.muted = !this.muted;
 	}
 };
 
