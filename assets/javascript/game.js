@@ -4,8 +4,10 @@ var game = {
 	incorrectLetters: [],
 	guessesRemaining: 6,
 	wins: 0,
-	inProgress: false,
-	wordList: ["object", "array", "variable", "loop", "container", "grid", "javascript", "column", "string", "bootstrap", ],
+	wordList: ["object", "array", "variable", "loop", "container", "grid", "javascript", "column", 
+				"string", "bootstrap", "float", "position", "attribute", "property", "height", "width",
+				"border", "color", "integer", "function", "method", "argument", "parameter", "expression",
+				"comment"],
 	currentWord: "",
 	wordState: [],
 	lettersRemaining: 0,
@@ -16,10 +18,6 @@ var game = {
 	KOLoseFX: null,
 	bellFX: null,
 	crowdFX: null,
-
-	startGame() {
-		this.inProgress = true;
-	},
 
 	// Pick a new word and initialize other game variables
 	reset() {
@@ -42,6 +40,7 @@ var game = {
 		this.bellFX.play();
 	},
 
+	// Trigger Mike KO animation and update win counter, then picks a new word
 	win() {
 		console.log("YOU WIN!");
 		console.log("-------------------------");
@@ -51,17 +50,21 @@ var game = {
 		setTimeout(function(){
 			game.reset();
 			game.update();
-		}, 750);
+		}, 1000);
 	},
 
+	// Trigger Mac KO animation then picks a new word
 	lose() {
 		console.log("YOU LOSE!");
 		console.log("-------------------------");
 		this.macKO();
 		setTimeout(function(){
+			document.getElementById('wordState').innerHTML = game.currentWord;
+		}, 1);
+		setTimeout(function(){
 			game.reset();
 			game.update();
-		}, 750);
+		}, 1750);
 	},
 
 	checkLetter(c) {
