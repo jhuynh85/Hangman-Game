@@ -11,6 +11,8 @@ body {
 	font-family: 'Press Start 2P', sans-serif;
 	line-height: 30px;
 	text-align: center;
+	background-color: #1b1b1b;
+	color: yellow;
 }
 
 header {
