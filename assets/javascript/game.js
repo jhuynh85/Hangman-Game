@@ -1,17 +1,17 @@
 // Game object
 var game = {
-	lettersGuessed: [],
-	incorrectLetters: [],
-	guessesRemaining: 6,
-	wins: 0,
+	lettersGuessed: [],		// List of letters already guessed
+	incorrectLetters: [],	// List of incorrect letters already guessed
+	guessesRemaining: 6,	// # of guesses remaining
+	wins: 0,				// # of wins
 	wordList: ["object", "array", "variable", "loop", "container", "grid", "javascript", "column", 
 				"string", "bootstrap", "float", "position", "attribute", "property", "height", "width",
 				"border", "color", "integer", "function", "method", "argument", "parameter", "expression",
-				"comment"],
-	currentWord: "",
-	wordState: [],
-	lettersRemaining: 0,
-	muted: false,
+				"comment"],	// Word bank
+	currentWord: "",		// Currently selected word
+	wordState: [],			// State of game (starts out filled with '_')
+	lettersRemaining: 0,	// Letters remaining for user to guess
+	muted: false,			// Flags whether music is on/off
 	punchFX: null,
 	hitFX: null,
 	KOWinFX: null,
@@ -59,12 +59,13 @@ var game = {
 		console.log("-------------------------");
 		this.macKO();
 		setTimeout(function(){
+			// Reveal word to user before resetting
 			document.getElementById('wordState').innerHTML = game.currentWord;
 		}, 1);
 		setTimeout(function(){
 			game.reset();
 			game.update();
-		}, 1750);
+		}, 1750);		
 	},
 
 	checkLetter(c) {
@@ -99,6 +100,7 @@ var game = {
 
 		// Letter not found
 		if (!found){
+			// Add to list of incorrect letters
 			this.incorrectLetters.push(c);
 			this.guessesRemaining--;
 			if (this.guessesRemaining===0){
@@ -176,7 +178,6 @@ var game = {
 			document.getElementById('PC').style.display = 'block';
 		}, 750);
 	},
-
 
 	// Draw Mac getting KO'ed
 	macKO() {
@@ -274,6 +275,7 @@ game.KOLoseFX = new Audio('assets/audio/ko-lose.mp3');
 game.bellFX = new Audio('assets/audio/bell.mp3');
 game.crowdFX = new Audio('assets/audio/crowd.mp3');
 
+// Pick a word
 game.reset();
 game.update();
 
