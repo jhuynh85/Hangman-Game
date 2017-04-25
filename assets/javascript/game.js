@@ -60,12 +60,12 @@ var game = {
 		this.macKO();
 		setTimeout(function(){
 			// Reveal word to user before resetting
-			document.getElementById('wordState').innerHTML = game.currentWord;
+			document.getElementById('wordState').innerHTML = game.currentWord;		
+			setTimeout(function(){
+				game.reset();
+				game.update();
+			}, 1750);		
 		}, 1);
-		setTimeout(function(){
-			game.reset();
-			game.update();
-		}, 1750);		
 	},
 
 	checkLetter(c) {
@@ -153,7 +153,7 @@ var game = {
 			document.getElementById('PC-punched').style.display = 'none';
 			document.getElementById('player').style.display = 'block';
 			document.getElementById('PC').style.display = 'block';
-		}, 750);
+		}, 500);
 	},
 
 	// Draw Mike punching Little Mac
@@ -176,7 +176,7 @@ var game = {
 			document.getElementById('PC-punched').style.display = 'none';
 			document.getElementById('player').style.display = 'block';
 			document.getElementById('PC').style.display = 'block';
-		}, 750);
+		}, 500);
 	},
 
 	// Draw Mac getting KO'ed
@@ -245,7 +245,7 @@ var game = {
 	hpAnimate(barID, targetWidth){
 		var elem = document.getElementById(barID);
     	var currentWidth = elem.clientWidth;
-    	var id = setInterval(frame, 5);
+    	var id = setInterval(frame, 2);
     	
     	function frame() {
         	if (currentWidth == targetWidth) {
