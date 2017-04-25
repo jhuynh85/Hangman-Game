@@ -279,7 +279,11 @@ game.KOWinFX = new Audio('assets/audio/ko-win.mp3');
 game.KOLoseFX = new Audio('assets/audio/ko-lose.mp3');
 game.bellFX = new Audio('assets/audio/bell.mp3');
 game.crowdFX = new Audio('assets/audio/crowd.mp3');
-document.getElementById('theme').volume = 0.5; // Reduce music volume
+
+// Reduce volume
+document.getElementById('theme').volume = 0.5;
+game.bellFX.volume = 0.5;
+game.crowdFX.volume = 0.5;
 
 // Pick a word
 game.reset();
