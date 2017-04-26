@@ -359,6 +359,10 @@ game.crowdFX = new Audio('assets/audio/crowd.mp3');
 
 // Reduce volume
 document.getElementById('theme').volume = 0.5;
+game.punchFX.volume = 0.5;
+game.hitFX.volume = 0.5;
+game.KOWinFX.volume = 0.5;
+game.KOLoseFX.volume = 0.5;
 game.bellFX.volume = 0.5;
 game.crowdFX.volume = 0.5;
 
