@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+
 		<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 		<title>Hangman Game</title>
@@ -13,40 +13,39 @@
 			<p>If you are reading this, it is because your browser does not support the audio element.</p>
 		</audio>
 		<div id="container">
-		<header>
-			<h1>MIKE TYSON'S SUPER HANGMAN PUNCH-OUT!</h1>
-		</header>
-		
-		<div class="clearfix" id="ring">
-			<img id="ring-img" src="assets/images/ring.jpg">
-			<div id="player"></div>
-			<div id="player-punched"></div>
-			<div id="PC"></div>
-			<div id="PC-punched"></div>
+			<header><h1>MIKE TYSON'S SUPER HANGMAN PUNCH-OUT!</h1></header>
 
-			<div class="healthBar" id="playerHP"></div>
-			<div class="healthBar" id="CPUHP"></div>
-			<div class="hpBackground" id="hpBG1"></div>
-			<div class="hpBackground" id="hpBG2"></div>
-			<div id="toggleMusic" onclick="game.musicToggle()"><img src="assets/images/mute.png"></div>
-		</div>
-		<div class="clearfix" id="scoreboard">
-			<img id="trophy-img" src="assets/images/trophy.png">
-			<div id="score">X 0</div>
-		</div>
+			<div class="clearfix" id="ring">
+				<img id="ring-img" src="assets/images/ring.jpg">
+				<div id="player"></div>
+				<div id="player-punched"></div>
+				<div id="PC"></div>
+				<div id="PC-punched"></div>
 
-		<aside>
-		<section>Guess the word to defeat Mike!
-			<br><br>
-			Current Word
-			<br><br>
-			<div id="wordState"></div>
-		</section>
-		<section>Letters Already Guessed
-			<br>
-			<div id="incorrectLetters"></div>
-			</section>
-		</aside>
+				<div class="healthBar" id="playerHP"></div>
+				<div class="healthBar" id="CPUHP"></div>
+				<div class="hpBackground" id="hpBG1"></div>
+				<div class="hpBackground" id="hpBG2"></div>
+				<div id="toggleMusic" onclick="game.musicToggle()"><img src="assets/images/mute.png"></div>
+			</div>
+			<div class="clearfix" id="scoreboard">
+				<img id="trophy-img" src="assets/images/trophy.png">
+				<div id="score">X 0</div>
+			</div>
+
+			<aside>
+				<section>Guess the word to defeat Mike!
+					<br><br>
+					Current Word
+					<div id="hint"></div>
+					<br>
+					<div id="wordState"></div>
+				</section>
+				<section>Letters Already Guessed
+					<br>
+					<div id="incorrectLetters"></div>
+				</section>
+			</aside>
 		</div>
 
 		<script type="text/javascript" src="assets/javascript/game.js"></script>

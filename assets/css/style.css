@@ -167,6 +167,10 @@ section {
 	cursor: pointer;
 }
 
+#hint {
+	color: #16a7ff;
+}
+
 .clearfix:after {
    content: " "; /* Older browser do not support empty content */
    visibility: hidden;

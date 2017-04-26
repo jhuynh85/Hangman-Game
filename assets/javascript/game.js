@@ -4,11 +4,75 @@ var game = {
 	incorrectLetters: [],	// List of incorrect letters already guessed
 	guessesRemaining: 6,	// # of guesses remaining
 	wins: 0,				// # of wins
-	wordList: ["object", "array", "variable", "loop", "container", "grid", "javascript", "column", 
-				"string", "bootstrap", "float", "position", "attribute", "property", "height", "width",
-				"border", "color", "integer", "function", "method", "argument", "parameter", "expression",
-				"comment"],	// Word bank
+	wordList: [{
+					word: "object",
+					hint: "In Javascript, almost everything is this"
+				}, 
+				{	word: "array",
+					hint: "You can access its elements using an index"
+				}, 
+				{	word: "variable",
+					hint: "You can store values in this"
+				}, 
+				{	
+					word: "loop",
+					hint: "Use this to run code multiple times"
+				}, 
+				{
+					word: "grid",
+					hint: "Bootstrap's positioning system is based on this"
+				}, 
+				{
+					word: "javascript",
+					hint: "Popular web programming language"
+				}, 
+				{
+					word: "column",
+					hint: "Opposite of row"
+				}, 
+				{
+					word: "string",
+					hint: "Values of this data type are surrounded by quotation marks"
+				}, 
+				{
+					word: "bootstrap",
+					hint: "Popular front-end framework"
+				}, 
+				{
+					word: "function",
+					hint: "A section of code that can be 'called' when needed"
+				}, 
+				{
+					word: "expression",
+					hint: "A section of code that can be evaluated"
+				},
+				{
+					word: "comment",
+					hint: "Code that the compiler ignores"
+				},
+				{
+					word: "position",
+					hint: "'relative' and 'absolute' are values of this property"	
+				},
+				{
+					word: "jquery",
+					hint: "Popular Javascript library"
+				},
+				{
+					word: "span",
+					hint: "This tag is an in-line element"
+				},
+				{
+					word: "boolean",
+					hint: "Data type that can be either true or false"
+				},
+				{
+					word: "undefined",
+					hint: "Unassigned variables have this value"
+				}],
+
 	currentWord: "",		// Currently selected word
+	hint: "",				// Hint for current word
 	wordState: [],			// State of game (starts out filled with '_')
 	lettersRemaining: 0,	// Letters remaining for user to guess
 	muted: false,			// Flags whether music is on/off
@@ -23,8 +87,11 @@ var game = {
 	reset() {
 		console.log("NEW GAME");
 
-		// Randomly pick a word from the list
-		this.currentWord = this.wordList[Math.floor(Math.random()*this.wordList.length)];
+		// Randomly pick a word from the list and display hint
+		var index = Math.floor(Math.random()*this.wordList.length);
+		this.currentWord = this.wordList[index]['word'];
+		this.hint = this.wordList[index]['hint'];
+		document.getElementById("hint").innerHTML = "HINT: "+this.hint;
 		
 		// Initialize wordState to have same number of blanks as chosen word
 		this.wordState = [];
@@ -71,12 +138,11 @@ var game = {
 	// Check if the current word contains the given letter and calls the relevant methods
 	checkLetter(c) {
 		// Check if letter has already been guessed before
-		for (var j=0; j<this.lettersGuessed.length; j++){
-			if (c===this.lettersGuessed[j]){
-				// Letter has been already guesssed, do nothing
-				return;
-			}
+		if (this.lettersGuessed.indexOf(c) != -1){
+			// Letter has been already guessed, do nothing
+			return;
 		}
+
 		// Add letter to list of guessed letters
 		this.lettersGuessed.push(c);
 
@@ -150,7 +216,6 @@ var game = {
 		document.getElementById('player-punched').style.display = 'block';
 		document.getElementById('PC-punched').style.display = 'block';
 		
-
 		// Delay before resuming default animations
 		setTimeout(function(){
 			document.getElementById('player-punched').style.display = 'none';
@@ -296,7 +361,7 @@ document.onkeyup = function(event){
 	var key = event.keyCode;
 
  	// Check if letter key
- 	if (key > 64 && key <91){
+ 	if (key > 64 && key < 91){
  		// Check if letter is in word
  		var letter = String.fromCharCode(key).toLowerCase();
  		console.log("Guessed '"+letter+"'");
