@@ -1,9 +1,6 @@
 // Game object
 var game = {
-	lettersGuessed: [],		// List of letters already guessed
-	incorrectLetters: [],	// List of incorrect letters already guessed
-	guessesRemaining: 6,	// # of guesses remaining
-	wins: 0,				// # of wins
+	// Word bank
 	wordList: [{
 					word: "object",
 					hint: "In Javascript, almost everything is this"
@@ -16,7 +13,7 @@ var game = {
 				}, 
 				{	
 					word: "loop",
-					hint: "Use this to run code multiple times"
+					hint: "Use this to run a section of code multiple times"
 				}, 
 				{
 					word: "grid",
@@ -52,7 +49,7 @@ var game = {
 				},
 				{
 					word: "position",
-					hint: "'relative' and 'absolute' are values of this property"	
+					hint: "'relative', 'absolute', and 'fixed' are values of this property"	
 				},
 				{
 					word: "jquery",
@@ -69,8 +66,23 @@ var game = {
 				{
 					word: "undefined",
 					hint: "Unassigned variables have this value"
+				},
+				{
+					word: "arguments",
+					hint: "These go inside the parentheses of a function"
+				},
+				{
+					word: "link",
+					hint: "Tag used to access an external resource"
+				},
+				{
+					word: "script",
+					hint: "Tag used to define a section of Javascript code"
 				}],
-
+	lettersGuessed: [],		// List of letters already guessed
+	incorrectLetters: [],	// List of incorrect letters already guessed
+	guessesRemaining: 6,	// # of guesses remaining
+	wins: 0,				// # of wins
 	currentWord: "",		// Currently selected word
 	hint: "",				// Hint for current word
 	wordState: [],			// State of game (starts out filled with '_')
