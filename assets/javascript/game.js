@@ -1,6 +1,6 @@
 // Game object
 var game = {
-	// Word bank
+    // Word bank
 	wordList: [{
 					word: "object",
 					hint: "In Javascript, almost everything is this"
@@ -79,15 +79,15 @@ var game = {
 					word: "script",
 					hint: "Tag used to define a section of Javascript code"
 				}],
-	lettersGuessed: [],		// List of letters already guessed
-	incorrectLetters: [],	// List of incorrect letters already guessed
-	guessesRemaining: 6,	// # of guesses remaining
-	wins: 0,				// # of wins
-	currentWord: "",		// Currently selected word
-	hint: "",				// Hint for current word
-	wordState: [],			// State of game (starts out filled with '_')
-	lettersRemaining: 0,	// Letters remaining for user to guess
-	muted: false,			// Flags whether music is on/off
+	lettersGuessed: [],    // List of letters already guessed
+	incorrectLetters: [],  // List of incorrect letters already guessed
+	guessesRemaining: 6,   // # of guesses remaining
+	wins: 0,               // # of wins
+	currentWord: "",       // Currently selected word
+	hint: "",              // Hint for current word
+	wordState: [],         // State of game (starts out filled with '_')
+	lettersRemaining: 0,   // Letters remaining for user to guess
+	muted: false,          // Flags whether music is on/off
 	punchFX: null,
 	hitFX: null,
 	KOWinFX: null,
@@ -96,7 +96,7 @@ var game = {
 	crowdFX: null,
 
 	// Pick a new word and initialize other game variables
-	reset() {
+	reset: function () {
 		console.log("NEW GAME");
 
 		// Randomly pick a word from the list and display hint
@@ -120,7 +120,7 @@ var game = {
 	},
 
 	// Trigger Mike KO animation and update win counter, then picks a new word
-	win() {
+	win: function () {
 		console.log("YOU WIN!");
 		console.log("-------------------------");
 		this.wins++;
@@ -133,7 +133,7 @@ var game = {
 	},
 
 	// Trigger Mac KO animation then picks a new word
-	lose() {
+	lose: function () {
 		console.log("YOU LOSE!");
 		console.log("-------------------------");
 		this.macKO();
@@ -145,10 +145,10 @@ var game = {
 				game.update();
 			}, 1250);		
 		}, 1);
-	},
+    },
 
 	// Check if the current word contains the given letter and calls the relevant methods
-	checkLetter(c) {
+	checkLetter: function(c) {
 		// Check if letter has already been guessed before
 		if (this.lettersGuessed.indexOf(c) != -1){
 			// Letter has been already guessed, do nothing
@@ -194,7 +194,7 @@ var game = {
 	},
 
 	// Update screen elements
-	update(){
+	update: function (){
 		// Update blanks
 		document.getElementById('wordState').innerHTML = this.wordState.join("");
 
@@ -215,7 +215,7 @@ var game = {
 	},
 
 	// Draw Little Mac punching Mike
-	punch(){
+	punch: function (){
 		this.punchFX.play();
 		
 		// Hide default Little Mac and Mike animations
@@ -238,7 +238,7 @@ var game = {
 	},
 
 	// Draw Mike punching Little Mac
-	miss(){
+	miss: function (){
 		this.hitFX.play();
 
 		// Hide default Little Mac and Mike animations
@@ -261,7 +261,7 @@ var game = {
 	},
 
 	// Draw Mac getting KO'ed
-	macKO() {
+	macKO: function () {
 		this.KOLoseFX.play();
 		this.crowdFX.play();
 		var player = document.getElementById('player');
@@ -294,7 +294,7 @@ var game = {
 	},
 
 	// Draw Mike getting KO'ed
-	mikeKO() {
+	mikeKO: function () {
 		this.KOWinFX.play();
 		this.crowdFX.play();
 		var player = document.getElementById('player');
@@ -322,7 +322,7 @@ var game = {
 	},
 
 	// Animate the HP bar to the specified width
-	hpAnimate(barID, targetWidth){
+	hpAnimate: function (barID, targetWidth){
 		var elem = document.getElementById(barID);
     	var currentWidth = elem.clientWidth;
     	var id = setInterval(frame, 2);
@@ -341,7 +341,7 @@ var game = {
 	},
 
 	// Toggle music on/off
-	musicToggle() {
+	musicToggle: function () {
 		document.getElementById('theme').muted = !this.muted;
 		this.muted = !this.muted;
 	}
